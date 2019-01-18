@@ -39,10 +39,11 @@ function makeImageCard(image){
 function addLikesHandler(event){
   // debugger
   const card = event.target.parentNode
+  const id = event.target
   let likes = event.target.parentNode.childNodes[5].innerText.split(" ")[1]
-  likes = ++likes
-  likes.innerText = likes
-  console.log(likes);
+  newlikes = parseInt(likes) + 1
+  event.target.parentNode.childNodes[5].innerText.split(" ")[1] = newlikes
+  updateLikes().then(init)
 }
 
 // comments mostly working 😇
@@ -92,6 +93,24 @@ function postComment(newComment){
         })
     }
     return fetch(commentsURL, options)
+    .then(response => response.json())
+
+}
+
+function updateLikes(){
+  const options = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json",
+
+        },
+        body: JSON.stringify({
+
+          "image_id": `1866`,
+        })
+    }
+    return fetch(likeURL, options)
     .then(response => response.json())
 
 }
