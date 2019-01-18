@@ -33,7 +33,7 @@ A user of your app must be able to do the following things:
 For this challenge it is important to work iteratively: one feature at a time, before moving on to the next. You should **prioritize making code that works over attempting all of the deliverables.** It is better to have a handfull of fully working features than 10 things that were attempted but do not work.
 
 We have provided a series of prioritized steps to help you break down your approach this problem:
-
+<!--
 ## Step 1 - Get the Image Data
 
 When the page loads, you will need to make a request to the API to get the data about your picture. The API follows RESTful conventions, but *make sure you read the API documentation* to familiarize yourself with the models, their associations, and the available endpoints of the API.
@@ -73,10 +73,10 @@ Use the data from the API response to change what's currently on the page (take 
 
 - the image url
 - the image name
-- the number of likes
-- any comments in an unordered list
+- the number of likes -->
+<!-- - any comments in an unordered list -->
 
-(If you cannot get your fetch request to work correctly, you can  use the example response above to append content to the DOM and attempt the subsequent steps)
+<!-- (If you cannot get your fetch request to work correctly, you can  use the example response above to append content to the DOM and attempt the subsequent steps) -->
 
 ## Step 2 - Like Feature (Frontend)
 
