@@ -23,9 +23,10 @@ function makeImageCard(image){
         <form id="comment_form">
           <input id="comment_input" type="text" name="comment" placeholder="Add Comment"/>
           <input type="submit" value="Submit"/>
+
         </form>
         <ul id="comments">
-        <li id="comment-li"> ${comment.content}</li>
+        <li data-id = ${comment.id} id="comment-li"> ${comment.content} <button id="delete_button">❌</button></li>
       </ul>
     </div>`
   })
@@ -33,6 +34,8 @@ function makeImageCard(image){
   likeBtn.addEventListener("click", addLikesHandler)
   const commentForm = document.querySelector("#comment_form")
   commentForm.addEventListener("submit", addCommentHandler)
+  const deleteBtn = document.querySelector("#delete_button")
+  deleteBtn.addEventListener("click", deleteCommentsHandler)
 }
 
 function addLikesHandler(event){
@@ -61,6 +64,13 @@ function addCommentsToList(comment){
 
 }
 
+//mostly working
+function deleteCommentsHandler(event){
+  const commentID = event.target.parentNode.dataset.id
+  const deletedLi = event.target.parentNode
+  deletedLi.remove();
+  deleteComment(commentID).then(init)
+}
 
 
 
@@ -110,4 +120,18 @@ function updateLikes(){
     return fetch(likeURL, options)
     .then(response => response.json())
 
+}
+
+function deleteComment(commentID){
+  const options = {
+        method: 'DELETE',
+        message: 'comment destroyed',
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json",
+
+        },
+    }
+    return fetch(commentsURL + `/${commentID}`, options)
+    .then(response => response.json())
 }
