@@ -80,18 +80,49 @@ likeButton.addEventListener("click", function(event){
    }//end of object
 
   )//end of fetch
-
-  .then(function(response){
-  	response.json()
-  })
-  .then(function(data){
-  	//console.log(data);
-  })
+//dont need them if do optp
+  // .then(function(response){
+  // 	response.json()
+  // })
+  // .then(function(data){
+  // 	//console.log(data);
+  // })
 
  })//end of listener
+//this one has access to ul so thatws how we get it below!! DOM CONTENT
+commentForm.addEventListener("submit", function(event){ submitComment(event, ul) })
 
-commentForm.addEventListener("submit",function(event){
-	event.preventDefault();
+//functions here
+
+function renderComments(comment){
+             //li = createElement("li")
+             let li = document.createElement("li")
+             li.innerHTML = comment.content
+              ul.append(li)
+             }
+
+      
+
+
+})//end of DOM
+
+
+function renderImage (data){
+let selectedImage = data.url;
+image.src = selectedImage
+let selectedName = data.name;
+console.log(selectedName)
+name.innerHTML = selectedName
+let like_count = data.like_count
+likes.innerHTML = like_count
+let selectedComments= data.comments
+selectedComments.forEach(renderComments)
+//debugger;
+}
+
+
+function submitComment(event, ul) {
+  event.preventDefault();
 
    let newComment = commentInput.value
    //debugger;
@@ -121,42 +152,13 @@ commentForm.addEventListener("submit",function(event){
   )//end of fetch
 
   .then(function(response){
-  	response.json()
+    response.json()
   })
   .then(function(data){
-  	//console.log(data);
-  	//
+    //console.log(data);
+    //
   })
 
-})
-
-//functions here
-
-function renderComments(comment){
-             //li = createElement("li")
-             let li = document.createElement("li")
-             li.innerHTML = comment.content
-              ul.append(li)
-             }
-
-      function renderImage (data){
-           let selectedImage = data.url;
-           image.src = selectedImage
-           let selectedName = data.name;
-           console.log(selectedName)
-            name.innerHTML = selectedName
-           let like_count = data.like_count
-           likes.innerHTML = like_count
-           let selectedComments= data.comments
-           selectedComments.forEach(renderComments)
-           //debugger;
-          }
-
-
-})//end of DOM
-
-
-
-
-
+}
+}
 
