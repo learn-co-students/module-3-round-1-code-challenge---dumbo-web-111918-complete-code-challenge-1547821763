@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
   let likesBtn = document.querySelector("button")
   let imageDiv = document.getElementById("image_card");
   let imageName = document.getElementById("name");
@@ -58,6 +57,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderNewComment(obj) {
     let commentSection = document.getElementById("comments");
     commentSection.innerHTML += 
+    `<li data-id="${formObj.id}"> ${formObj.content}</li>`
+  }
+
+  function RenderComments() {
+    fetch(`https://randopic.herokuapp.com/comments/`)
+    .then(obj => obj.json())
+    .then(parsedObj => renderAllComments(parsedObj))
+  }
+
+  function renderAllComments(obj) {
+    commetSection.innerHTML +=
     `<li data-id="${formObj.id}"> ${formObj.content}</li>`
   }
   
