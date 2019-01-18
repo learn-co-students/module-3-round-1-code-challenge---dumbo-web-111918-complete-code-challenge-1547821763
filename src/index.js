@@ -1,6 +1,11 @@
 function slapCommentOnDOM(comment, ul){
   let thisComment = document.createElement('li')
   thisComment.innerText = comment.content
+  let deleteBtn = document.createElement('button')
+  deleteBtn.className = "delete-btn"
+  deleteBtn.dataset.id = comment.id
+  deleteBtn.innerText = "Delete"
+  thisComment.append(deleteBtn)
   ul.append(thisComment)
 }
 
@@ -26,6 +31,18 @@ document.addEventListener('DOMContentLoaded', () => {
   let imageComments = document.querySelector("#comments")
   let likeBtn = document.querySelector("#like_button")
   let commentForm = document.querySelector("#comment_form")
+
+
+  imageComments.addEventListener("click", function(e){
+      if (e.target.className === "delete-btn") {
+        parentComment = e.target.parentElement
+        commentId = e.target.dataset.id
+        fetch(`https://randopic.herokuapp.com/comments/${commentId}`, {
+          method: "DELETE"
+        })
+        imageComments.removeChild(parentComment)
+      }
+  })
 
 
   commentForm.addEventListener("submit", function(e){
@@ -63,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
       body: JSON.stringify(likeObj)
     })
   })
-
 
 
   fetch(imageURL)
