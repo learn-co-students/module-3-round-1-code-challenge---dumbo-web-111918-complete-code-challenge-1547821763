@@ -5,13 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const likeURL = `https://randopic.herokuapp.com/likes/`;
   const commentsURL = `https://randopic.herokuapp.com/comments/`;
 
+  //Event Listeners
   const likeButton = document.querySelector("#like_button");
   likeButton.addEventListener("click", addLike);
   const commentForm = document.querySelector("#comment_form");
   commentForm.addEventListener("submit", addComment);
   const comments = document.querySelector("#comments");
   comments.addEventListener("click", handleCommentClick);
-
+  //Initial Data
   readResource(imageURL, displayImage);
 });
 
@@ -39,28 +40,8 @@ function addComment(e) {
   commentInput.value = ""
   createResource(commentsURL, comment, displayComment);
 }
-function displayImage(data) {
-  let tag = document.querySelector("#image");
-  let title = document.querySelector("#name");
-  let likes = document.querySelector("#likes");
-  let comments = document.querySelector("#comments");
-  tag.src = data.url;
-  tag.dataset.id = data.id;
-  title.innerText = data.name;
-  likes.innerText = data.like_count;
-  displayComments(data.comments);
-}
-function displayComments(comments) {
-  let commentList = document.querySelector("#comments");
-  for (comment of comments) {
-    let comLI = newCommentLI(comment);
-    commentList.append(comLI);
-  }
-}
-function displayComment(comment) {
-  document.querySelector("#comments")
-    .append(newCommentLI(comment));
-}
+
+
 function newCommentLI(comment) {
   let com = document.createElement("li");
   let deleteButton = document.createElement("button");
@@ -86,12 +67,36 @@ function removeCommentFromDOM(id) {
   let comLI = document.querySelector(`li[data-comment-id='${id}']`);
   comLI.remove();
 }
+function displayImage(data) {
+  let tag = document.querySelector("#image");
+  let title = document.querySelector("#name");
+  let likes = document.querySelector("#likes");
+  let comments = document.querySelector("#comments");
+  tag.src = data.url;
+  tag.dataset.id = data.id;
+  title.innerText = data.name;
+  likes.innerText = data.like_count;
+  displayComments(data.comments);
+}
+function displayComments(comments) {
+  let commentList = document.querySelector("#comments");
+  for (comment of comments) {
+    let comLI = newCommentLI(comment);
+    commentList.append(comLI);
+  }
+}
+function displayComment(comment) {
+  document.querySelector("#comments")
+    .append(newCommentLI(comment));
+}
 function deleteComment(id) {
 
   deleteResource(`https://randopic.herokuapp.com/comments/${id}`, (data) => {
     if(data.message == 'Comment Successfully Destroyed') {
       removeCommentFromDOM(id);
     } else {
+      let messages = document.querySelectorAll(".message");
+      messages.forEach(message => message.remove());
       addMessage(data.message);
     }
   });
