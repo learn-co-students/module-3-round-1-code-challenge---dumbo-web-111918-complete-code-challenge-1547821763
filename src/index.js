@@ -35,11 +35,8 @@ function makeImageCard(image){
   commentForm.addEventListener("submit", addCommentHandler)
 }
 
-// not fully working
 function addLikesHandler(event){
-  // debugger
   const card = event.target.parentNode
-  const id = event.target
   let likes = event.target.parentNode.childNodes[5].innerText.split(" ")[1]
   newlikes = parseInt(likes) + 1
   event.target.parentNode.childNodes[5].innerText.split(" ")[1] = newlikes
