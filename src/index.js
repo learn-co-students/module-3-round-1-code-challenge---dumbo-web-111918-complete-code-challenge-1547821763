@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let imageDiv = document.getElementById("image_card");
   let imageName = document.getElementById("name");
   let commentForm = document.getElementById("comment_form")
-  // console.log('%c DOM Content Loaded and Parsed!', 'color: magenta')
+  console.log('%c DOM Content Loaded and Parsed!', 'color: magenta')
   
   let imageId = 1857 //Enter the id from the fetched image here
   
@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       body: JSON.stringify({
         image_id: imageId,
       })
-    })
-
+    }).then(response => console.log(response.json()))
   })
 
   //COMMENT FORM FUNCTIONALITY
@@ -50,7 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 
       body: JSON.stringify(formObj), 
     })
-    .then(response => response.json())
+    .then(function(response){
+      let commentInput = document.getElementById("comment_input");
+      commentInput.value = ""
+    })
   })
   
   function renderNewComment(obj) {
@@ -66,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(imageURL)
     .then(obj => obj.json())
     .then(function(parsedObj) {
-      imageName.innerText = `${parsedObj.name}`
+      imageName.innerText = `${parsedObj.name}!`
       appendImage(parsedObj)
     })
   }
