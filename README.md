@@ -36,7 +36,7 @@ We have provided a series of prioritized steps to help you break down your appro
 
 ## Step 1 - Get the Image Data
 
-When the page loads, you will need to make a request to the API to get the data about your picture. The API follows RESTful conventions, but *make sure you read the API documentation* to familiarize yourself with the models, their associations, and the available endpoints of the API.
+<!-- When the page loads, you will need to make a request to the API to get the data about your picture. The API follows RESTful conventions, but *make sure you read the API documentation* to familiarize yourself with the models, their associations, and the available endpoints of the API.
 
 #### API Docs
 
@@ -76,15 +76,15 @@ Use the data from the API response to change what's currently on the page (take 
 - the number of likes
 - any comments in an unordered list
 
-(If you cannot get your fetch request to work correctly, you can  use the example response above to append content to the DOM and attempt the subsequent steps)
+(If you cannot get your fetch request to work correctly, you can  use the example response above to append content to the DOM and attempt the subsequent steps) -->
 
 ## Step 2 - Like Feature (Frontend)
 
-The next feature to approach is the functionality to add likes to a picture. First, get this working in the browser only without worrying about persistence.
+<!-- The next feature to approach is the functionality to add likes to a picture. First, get this working in the browser only without worrying about persistence.
 
 Clicking the 'Like' button should increase the number of likes shown on the page by one.
 
-A user can like the same picture multiple times.
+A user can like the same picture multiple times. -->
 
 ---
 
@@ -96,7 +96,7 @@ This app will use what is called _optimistic rendering_. This means the DOM will
 
 #### Endpoint to create a Like
 
-Send a string containing a JSON object as the request's body. In the JSON, make sure the `image_id` key has the value of your assigned image ID. This will tell your newly-created like which image it belongs to (remember database associations?😱).
+<!-- Send a string containing a JSON object as the request's body. In the JSON, make sure the `image_id` key has the value of your assigned image ID. This will tell your newly-created like which image it belongs to (remember database associations?😱).
 
 ```js
 POST 'https://randopic.herokuapp.com/likes'
@@ -125,7 +125,7 @@ Example Response:
 
 Since we are using optimistic rendering, you shouldn't have to do anything with the response.
 
-To test your code, make sure the number of likes increments when you click the like button. Then, refresh the page and make sure the increased number of likes remains the same.
+To test your code, make sure the number of likes increments when you click the like button. Then, refresh the page and make sure the increased number of likes remains the same. -->
 
 ---
 
