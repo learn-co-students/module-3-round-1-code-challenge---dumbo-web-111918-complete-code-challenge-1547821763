@@ -1,10 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  let likeBtn = document.getElementById("likes-button");
-  likeBtn.addEventListener("click", function(event) {
-    console.log("working")
-  })
-
   let likesBtn = document.querySelector("button")
   let imageDiv = document.getElementById("image_card");
   let imageName = document.getElementById("name");
@@ -21,8 +16,21 @@ document.addEventListener('DOMContentLoaded', () => {
   
   //FUNCTIONS FOR CHANGING AND UPDATING LIKES
   likesBtn.addEventListener("click", function(){
-    event.preventDefault();
-    console.log("working")
+    let numOfLikes = document.getElementById("likes");
+    let newLikes = parseInt(numOfLikes.innerText)
+    numOfLikes.innerText = newLikes + 1;
+    //patch to backend
+    fetch(`https://randopic.herokuapp.com/likes/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        image_id: imageId,
+      })
+    })
+
   })
 
   //COMMENT FORM FUNCTIONALITY
@@ -34,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       content: formValue.value
     }
     renderNewComment(formObj);
-    fetch(commentsURL, {
+    fetch(`https://randopic.herokuapp.com/comments/`, {
       method: "POST", 
       headers: {
         'Accept': 'application/json',
@@ -58,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(imageURL)
     .then(obj => obj.json())
     .then(function(parsedObj) {
+      imageName.innerText = `${parsedObj.name}`
       appendImage(parsedObj)
     })
   }
