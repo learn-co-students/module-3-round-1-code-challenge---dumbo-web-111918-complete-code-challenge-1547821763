@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  let likeBtn = document.getElementById("likes-button");
+  likeBtn.addEventListener("click", function(event) {
+    console.log("working")
+  })
+
   let likesBtn = document.querySelector("button")
   let imageDiv = document.getElementById("image_card");
   let imageName = document.getElementById("name");
@@ -46,18 +51,24 @@ document.addEventListener('DOMContentLoaded', () => {
     `<li data-id="${formObj.id}"> ${formObj.content}</li>`
   }
   
-  //FUNCTIONS FOR RENDERING IMAGE AND CHANGING IMAGE TITLE
-  fetch(imageURL)
-  .then(obj => obj.json())
-  .then(function(parsedObj) {
-    imageName.innerText = `${parsedObj.name}`
-    appendImage(parsedObj)
-  })
+  
+  // FUNCTIONS FOR RENDERING IMAGE AND CHANGING IMAGE TITLE
+  fetchImage();
+  function fetchImage() {
+    fetch(imageURL)
+    .then(obj => obj.json())
+    .then(function(parsedObj) {
+      appendImage(parsedObj)
+    })
+  }
   
   function appendImage(obj) {
-    imageDiv.innerHTML += 
+    let cardCol = document.querySelector(".card")
+    cardCol.innerHTML += 
     `<img src="http://blog.flatironschool.com/wp-content/uploads/2017/06/IMAG2936-352x200.jpg"/>`
   }
+
+  
   
 })
   
